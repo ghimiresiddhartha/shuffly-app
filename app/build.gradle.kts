@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.jetbrainsKotlinKapt)
+    alias(libs.plugins.googleDevtoolsKsp)
+    alias(libs.plugins.daggerHiltAndroid)
+    alias(libs.plugins.googleService)
 }
 
 android {
@@ -36,11 +40,33 @@ android {
 }
 
 dependencies {
+    implementation(libs.bundles.androidx)
+    implementation(libs.bundles.hilt)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
+    implementation(libs.bundles.exoplayer)
+    implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.ui.testing)
+    implementation(libs.bundles.unit.testing)
+    implementation(libs.androidx.constraintlayout)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
+    ksp(libs.androidx.databinding.compiler)
+    ksp(libs.androidx.databinding.common)
+    ksp(libs.databinding.android.compiler)
+    ksp(libs.hilt.compiler)
+    ksp(libs.hilt.android.test.compiler)
+    ksp(libs.glide.compiler)
+
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.google.identity)
+    implementation(libs.glide)
+
+    implementation(libs.bundles.googleplay)
+
+    implementation(libs.youtube.player)
+    implementation(libs.lottie)
+    implementation(libs.shimmer)
+    implementation(libs.circleimage)
+
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }
