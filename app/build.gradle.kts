@@ -1,3 +1,7 @@
+import com.android.build.gradle.internal.tasks.databinding.DataBindingGenBaseClassesTask
+import org.gradle.configurationcache.extensions.capitalized
+import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -8,34 +12,118 @@ plugins {
 }
 
 android {
-    namespace = "np.com.siddharthaghimire.shuffly"
-    compileSdk = 34
+    val packageName = rootProject.extra["applicationId"] as String
+    val compileSdkValue = rootProject.extra["compileSdk"] as Int
+    val minSdkValue = rootProject.extra["minSdk"] as Int
+    val targetSdkValue = rootProject.extra["targetSdk"] as Int
+    val appName = rootProject.extra["appName"] as String
+
+    val appVersionName = rootProject.extra["versionName"] as String
+    val testRunner = rootProject.extra["androidJUnitRunner"] as String
+    val proguardOptimizeBasic = rootProject.extra["proguardOptimize"] as String
+    val proguardOptimizePro = rootProject.extra["proguardRulesPro"] as String
+    val jvmTargetVersion = rootProject.extra["jvmTargetVersion"] as String
+
+    val buildTypeDebug = rootProject.extra["buildTypeDebug"] as String
+    val buildTypeRelease = rootProject.extra["buildTypeRelease"] as String
+
+    namespace = packageName
+    compileSdk = compileSdkValue
+
+    flavorDimensions.add(buildTypeRelease)
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
 
     defaultConfig {
-        applicationId = "np.com.siddharthaghimire.shuffly"
-        minSdk = 24
-        targetSdk = 34
+        applicationId = packageName
+        minSdk = minSdkValue
+        targetSdk = targetSdkValue
         versionCode = 1
-        versionName = "1.0"
+        versionName = appVersionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner = testRunner
     }
 
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix = ".$buildTypeDebug"
             isMinifyEnabled = false
+            isDebuggable = true
+            isShrinkResources = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile(proguardOptimizeBasic), proguardOptimizePro
+            )
+        }
+
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+            proguardFiles(
+                getDefaultProguardFile(proguardOptimizeBasic), proguardOptimizePro
             )
         }
     }
+
+    productFlavors {
+        create(appName) {
+            dimension = buildTypeRelease
+            versionCode = 1
+            versionName = appVersionName
+        }
+    }
+
+    dataBinding {
+        enable = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+        buildConfig = true
+    }
+
+    //allowing Dagger Hilt to correctly process annotations and generate the necessary code for dependency injection
+    androidComponents {
+        onVariants(selector().all()) { variant ->
+            afterEvaluate {
+                project.tasks.getByName("ksp" + variant.name.capitalized() + "Kotlin") {
+                    val dataBindingTask =
+                        project.tasks.getByName("dataBindingGenBaseClasses" + variant.name.capitalized()) as DataBindingGenBaseClassesTask
+                    (this as AbstractKotlinCompileTool<*>).setSource(dataBindingTask.sourceOutFolder)
+                }
+            }
+        }
+    }
+
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = jvmTargetVersion
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{DEPENDENCIES,LICENSE,LICENSE.txt,license.txt,LICENSE.md,LICENSE-notice.md,NOTICE,NOTICE.txt,notice.txt,ASL2.0,LGPL2.1,*.kotlin_module}"
+        }
+    }
+
+    testOptions.unitTests {
+        isReturnDefaultValues = true
+        all { tests ->
+            tests.useJUnitPlatform()
+            tests.testLogging {
+                events("passed", "failed", "skipped", "standardOut", "standardError")
+            }
+        }
     }
 }
 
