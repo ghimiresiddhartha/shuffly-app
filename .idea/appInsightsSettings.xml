@@ -27,10 +27,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="np.com.siddharthaghimire.shuffly.debug" />
+                  <option name="mobileSdkAppId" value="1:1008201275634:android:133156503af8f6f44f586b" />
+                  <option name="projectId" value="shuffly-2024" />
+                  <option name="projectNumber" value="1008201275634" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
