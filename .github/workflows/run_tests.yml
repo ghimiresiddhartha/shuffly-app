@@ -61,6 +61,14 @@ jobs:
       - name: Compile Android test
         run: ./gradlew compileDebugAndroidTestKotlin
 
+      - name: Enable KVM group perms
+        # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
+        # Starting on February 23, 2023, Actions users of GitHub-hosted larger Linux runners will be able to make use of hardware acceleration for Android testing
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
       - name: Run instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
