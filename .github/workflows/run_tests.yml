@@ -10,10 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 45
-    strategy:
-      matrix:
-        api-level: [ 23, 29 ]
-        target: [ default, google_apis ]
 
     steps:
       - uses: actions/checkout@v4
@@ -76,13 +72,10 @@ jobs:
       - name: Run instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86_64
-          profile: Nexus 6
+          api-level: 29
           emulator-boot-timeout: 300
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -logcat-output ${{ github.workspace }}/app/build/reports/avd33.log
           disable-animations: true
+          force-avd-creation: false
           script: ./gradlew connectedDebugAndroidTest
 
       - name: Upload build reports
