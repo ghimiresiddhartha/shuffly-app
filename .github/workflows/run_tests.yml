@@ -52,12 +52,6 @@ jobs:
       - name: Run debug test
         run: ./gradlew testDebugUnitTest
 
-      # Needed to accept licenses
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          log-accepted-android-sdk-licenses: false
-
       - name: Compile Android test
         run: ./gradlew compileDebugAndroidTestKotlin
 
@@ -76,6 +70,7 @@ jobs:
           emulator-boot-timeout: 300
           disable-animations: true
           force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: ./gradlew connectedDebugAndroidTest
 
       - name: Upload build reports
