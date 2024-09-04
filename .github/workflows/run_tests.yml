@@ -40,6 +40,13 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Build project and compile debug test
+        env:
+          BASE_URL_Y: ${{ secrets.BASE_URL_Y }}
+          BASE_URL_T: ${{ secrets.BASE_URL_T }}
+          BASE_URL_I: ${{ secrets.BASE_URL_I }}
+          HEADER_T: ${{ secrets.HEADER_T }}
+          HEADER_I: ${{ secrets.HEADER_I }}
+          FIREBASE_ENTITY: ${{ secrets.FIREBASE_ENTITY }}
         run: ./gradlew assembleDebug compileDebugUnitTestKotlin
 
       - name: Spotless
