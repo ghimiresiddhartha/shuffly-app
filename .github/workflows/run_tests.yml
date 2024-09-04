@@ -1,8 +1,6 @@
 name: Run tests
 
 on:
-  push:
-    branches: ["scripts"]
   pull_request:
     branches: ["main"]
 
@@ -12,7 +10,10 @@ jobs:
     timeout-minutes: 45
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -31,18 +32,20 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - uses: actions/cache@v4
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
         with:
-          path: |
-            ~/.gradle/caches/modules-2
-            ~/.gradle/caches/jars-2
-            ~/.gradle/caches/build-cache
-          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/settings.gradle*', 'checksum.txt') }}
-          restore-keys: |
-            gradle-
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
 
       - name: Build project and compile debug test
         run: ./gradlew assembleDebug compileDebugUnitTestKotlin
+
+      - name: Spotless
+        # Spotless is not gradle configuration cache compliant. To allow the rest of the build
+        # comply, run spotless with a gradle init script and disable the cache.
+        run: ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache
 
       - name: Run debug test
         run: ./gradlew testDebugUnitTest
