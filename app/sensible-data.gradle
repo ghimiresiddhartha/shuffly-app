@@ -1,0 +1,15 @@
+File localStoreFile = rootProject.file('local.properties')
+if (localStoreFile.exists()){
+    // Read local.properties file first if it exists
+    Properties p = new Properties()
+    new FileInputStream(localStoreFile).withCloseable { is -> p.load(is) }
+    p.each { name, value -> rootProject.ext[name] = value }
+} else {
+    //Read Environment Variable
+    rootProject.ext["BASE_URL_Y"] = System.getenv('BASE_URL_Y')
+    rootProject.ext["BASE_URL_T"] = System.getenv('BASE_URL_T')
+    rootProject.ext["BASE_URL_I"] = System.getenv('BASE_URL_I')
+    rootProject.ext["HEADER_T"] = System.getenv('HEADER_T')
+    rootProject.ext["HEADER_I"] = System.getenv('HEADER_I')
+    rootProject.ext["FIREBASE_ENTITY"] = System.getenv('FIREBASE_ENTITY')
+}

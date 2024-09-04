@@ -73,6 +73,9 @@ android {
             proguardFiles(
                 getDefaultProguardFile(proguardOptimizeBasic), proguardOptimizePro
             )
+            manifestPlaceholders["appName"] = "$appName Debug"
+            manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
+            manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_round"
         }
 
         release {
@@ -82,6 +85,9 @@ android {
             proguardFiles(
                 getDefaultProguardFile(proguardOptimizeBasic), proguardOptimizePro
             )
+            manifestPlaceholders["appName"] = "$appName Debug"
+            manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
+            manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_round"
         }
     }
 
@@ -90,6 +96,32 @@ android {
             dimension = buildTypeRelease
             versionCode = 1
             versionName = appVersionName
+
+            apply(from = "./sensible-data.gradle")
+
+            listOf(
+                "BASE_URL_Y" to rootProject.ext["BASE_URL_Y"] as String?,
+                "BASE_URL_T" to rootProject.ext["BASE_URL_T"] as String?,
+                "BASE_URL_I" to rootProject.ext["BASE_URL_I"] as String?,
+                "HEADER_T" to rootProject.ext["HEADER_T"] as String?,
+                "HEADER_I" to rootProject.ext["HEADER_I"] as String?,
+                "FIREBASE_ENTITY" to rootProject.ext["FIREBASE_ENTITY"] as String?,
+                "SEARCH_ENDPOINT" to project.properties["SEARCH_ENDPOINT"] as String?,
+                "T_TRENDING_ENDPOINT" to project.properties["T_TRENDING_ENDPOINT"] as String?,
+                "I_ENDPOINT" to project.properties["I_ENDPOINT"] as String?,
+                "Y_ID" to project.properties["Y_ID"] as String?,
+                "Y_TYPE" to project.properties["Y_TYPE"] as String?,
+                "Y_SORT_BY" to project.properties["Y_SORT_BY"] as String?,
+                "Y_VIDEO_LENGTH" to project.properties["Y_VIDEO_LENGTH"] as String?,
+                "Y_VIDEO_TYPE" to project.properties["Y_VIDEO_TYPE"] as String?,
+                "I_HASHTAG_SEARCH" to project.properties["I_HASHTAG_SEARCH"] as String?,
+                "T_SEARCH_KEYWORD" to project.properties["T_SEARCH_KEYWORD"] as String?
+            ).forEach { (name, value) -> buildConfigField("String", name, "\"$value\"") }
+
+            buildConfigField("boolean", "Y_SHOULD_SYNDICATE", "true")
+            buildConfigField("boolean", "Y_SHOULD_EMBED", "true")
+            buildConfigField("int", "MAX_RESULT", "20")
+            buildConfigField("String", "SHARED_PREF_NAME", "\"${appName}App\"")
         }
     }
 
