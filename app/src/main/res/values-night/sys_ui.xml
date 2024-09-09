@@ -15,5 +15,5 @@
      limitations under the License.
 -->
 <resources>
-    <style name="Theme.Shuffly" parent="Theme.MaterialComponents.DayNight.DarkActionBar"/>
+    <bool name="use_light_status_bar">false</bool>
 </resources>

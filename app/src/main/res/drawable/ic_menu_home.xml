@@ -14,19 +14,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
-    <color name="color_accent">#000000</color>
-    <color name="background">#FAF8FF</color>
-    <color name="color_blue_nav">#8557ff</color>
-    <color name="color_blue_text">#34a0ff</color>
-    <color name="color_container">#5CEFEFEF</color>
-    <color name="color_title_bg">#FDE33F</color>
-    <color name="color_opposite">@android:color/white</color>
-    <color name="color_shimmer">#BABABA</color>
-
-    <color name="clips_color">#f30507</color>
-
-    <color name="color_disabled">#E0E0E0</color>
-    <color name="color_enabled">#E1F6DF</color>
-    <color name="disabled_text_color">#959595</color>
-</resources>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+  <path
+      android:fillColor="@color/color_accent"
+      android:pathData="M160,840v-480l320,-240 320,240v480L560,840v-280L400,560v280L160,840Z"/>
+</vector>

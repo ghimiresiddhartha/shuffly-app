@@ -19,7 +19,12 @@ rootProject {
             kotlin {
                 target("**/*.kt")
                 targetExclude("**/build/**/*.kt")
-                ktlint(ktlintVersion).userData(mapOf("android" to "true"))
+                ktlint(ktlintVersion).userData(
+                    mapOf(
+                        "android" to "true",
+                        "max_line_length" to "off"
+                    )
+                )
                 licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
             }
             format("kts") {

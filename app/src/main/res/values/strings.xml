@@ -15,5 +15,51 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Shuffly</string>
+    <string name="shorts">Shorts</string>
+    <string name="tiktok">Tiktok</string>
+    <string name="reels">Reels</string>
+    <string name="videos">Videos</string>
+
+    <string name="youtube">YouTube</string>
+    <string name="instagram">Instagram</string>
+
+    <string name="for_you">For You</string>
+    <string name="trending">Trending</string>
+    <string name="see_all">See All</string>
+    <string name="default_notification_channel_id">shuffly</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="new_">New</string>
+
+    <string name="no_internet_connection_found">No Internet Connection</string>
+    <string name="no_internet_desc">Could not connect to the internet. Please check your network and</string>
+    <string name="retry">Try Again</string>
+    <string name="limit_exceed">Watch Limit Exceeded</string>
+    <string name="please_wait">Please Wait</string>
+
+    <string name="no_data_found">No Videos Found</string>
+    <string name="no_data_desc">Videos are not available at the moment.\nCheck back later.</string>
+
+    <string name="person">Person</string>
+    <string name="dot">•</string>
+    <string name="_12_nov">12 Nov</string>
+
+    <string name="error">Error</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="unknown_error_desc">Something went wrong while fetching </string>
+    <string name="player_error_desc">Something went wrong while playing video </string>
+
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="or_continue_with">or continue with</string>
+    <string name="let_s_go">Let\'s Go</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="whats_your_n_phone_number">What is your\n phone number?</string>
+    <string name="log_in">Log in</string>
+    <string name="whats_your_n_otp">What is the\n otp?</string>
+
+    <string name="allow_shuffly_to_send_you_push">Allow Shuffly to send you push notifications</string>
+    <string name="open_setting_to_allow_post_notification"> Tap “Allow” in settings to enable push notifications for new updates.</string>
+    <string name="recommended">Recommended</string>
+    <string name="nothing">nothing</string>
 </resources>

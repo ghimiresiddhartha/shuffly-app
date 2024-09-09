@@ -85,7 +85,7 @@ android {
             proguardFiles(
                 getDefaultProguardFile(proguardOptimizeBasic), proguardOptimizePro
             )
-            manifestPlaceholders["appName"] = "$appName Debug"
+            manifestPlaceholders["appName"] = appName
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
             manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_round"
         }
