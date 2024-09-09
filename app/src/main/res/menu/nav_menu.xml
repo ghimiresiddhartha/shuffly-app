@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_menu_home"
+        android:icon="@drawable/ic_menu_home"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_menu_shorts"
+        android:icon="@drawable/ic_menu_shorts"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Shorts" />
+
+    <item
+        android:id="@+id/nav_menu_tiktok"
+        android:icon="@drawable/ic_menu_tiktok"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Tiktok" />
+
+    <item
+        android:id="@+id/nav_menu_reels"
+        android:icon="@drawable/ic_menu_reels"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title="Reels" />
+
+<!--    <item-->
+<!--        android:id="@+id/nav_menu_more"-->
+<!--        android:icon="@drawable/ic_menu_video_library"-->
+<!--        android:title="More" />-->
+
+
+</menu>

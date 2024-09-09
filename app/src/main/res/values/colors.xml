@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright 2024 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources>
+    <color name="color_accent">#000000</color>
+    <color name="background">#FAF8FF</color>
+    <color name="color_blue_nav">#8557ff</color>
+    <color name="color_blue_text">#34a0ff</color>
+    <color name="color_container">#5CEFEFEF</color>
+    <color name="color_title_bg">#FDE33F</color>
+    <color name="color_opposite">@android:color/white</color>
+    <color name="color_shimmer">#BABABA</color>
 
+    <color name="clips_color">#f30507</color>
+
+    <color name="color_disabled">#E0E0E0</color>
+    <color name="color_enabled">#E1F6DF</color>
+    <color name="disabled_text_color">#959595</color>
 </resources>
